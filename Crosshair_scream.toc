@@ -3,5 +3,7 @@
 ## Notes: Simple crosshair shown in combat
 ## Author: Fab
 ## Version: 0.1.0
+## SavedVariables: CrosshairScreamDB
 
-FabCrosshair.lua
+Crosshair_Scream.lua
+Crosshair_Options.lua
