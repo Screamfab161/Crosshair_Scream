@@ -1,0 +1,7 @@
+## Interface: 120001
+## Title: FabCrosshair
+## Notes: Simple crosshair shown in combat
+## Author: Fab
+## Version: 0.1.0
+
+FabCrosshair.lua
