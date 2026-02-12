@@ -1,7 +1,7 @@
-print("Crosshair_Scream.lua LOADED")
-
 local ADDON = ...
 local f = CreateFrame("Frame")
+local configOpen = false -- wenn true: Crosshair immer sichtbar (Preview)
+
 
 local DEFAULTS = {
   enabled = true,
@@ -14,6 +14,7 @@ local DEFAULTS = {
   level = 9999,
   color = {1, 1, 1},
   pos = {0, 0}, -- offset x,y
+  dotColor = {1, 0, 0},
 }
 
 local crosshair, h, v, dot
@@ -58,7 +59,13 @@ local function ApplySettings()
 
   dot:SetPoint("CENTER")
   dot:SetSize(db.thickness, db.thickness)
-  dot:SetColorTexture(1, 0, 0, 1)
+  local lc = db.color or {1, 1, 1}
+  h:SetColorTexture(lc[1], lc[2], lc[3], db.alpha)
+  v:SetColorTexture(lc[1], lc[2], lc[3], db.alpha)
+
+  local dc = db.dotColor or {1, 0, 0}
+  dot:SetColorTexture(dc[1], dc[2], dc[3], 1)
+
 end
 
 local function InCombat()
@@ -68,10 +75,18 @@ end
 local function ApplyVisibility()
   local db = CrosshairScreamDB
   if not crosshair or not db then return end
+
+  -- Preview-Modus: während Config offen ist immer zeigen (ohne DB zu verändern)
+  if configOpen then
+    crosshair:Show()
+    return
+  end
+
   if not db.enabled then crosshair:Hide(); return end
   if db.combatOnly and not InCombat() then crosshair:Hide(); return end
   crosshair:Show()
 end
+
 
 -- API für UI-Datei:
 _G.CrosshairScream = _G.CrosshairScream or {}
@@ -84,6 +99,11 @@ _G.CrosshairScream.SetPos = function(x, y)
   CrosshairScreamDB.pos[1] = x
   CrosshairScreamDB.pos[2] = y
   _G.CrosshairScream.Apply()
+end
+_G.CrosshairScream.SetConfigOpen = function(open)
+  configOpen = open and true or false
+  ApplySettings()
+  ApplyVisibility()
 end
 
 f:RegisterEvent("ADDON_LOADED")

@@ -2,7 +2,7 @@
 ## Title: CrosshairScreamAOG
 ## Notes: Simple crosshair shown in combat
 ## Author: Fab
-## Version: 0.1.0
+## Version: 1.0.0
 ## SavedVariables: CrosshairScreamDB
 
 Crosshair_Scream.lua
