@@ -1,5 +1,5 @@
 ## Interface: 120001
-## Title: CrosshairScreamAOG
+## Title: AOG-XHair
 ## Notes: Simple crosshair shown in combat
 ## Author: Fab
 ## Version: 1.0.0
